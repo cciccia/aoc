@@ -31,11 +31,11 @@
   (with-open [rdr (io/reader (io/resource "day7.txt"))]
     (reduce (fn [acc line]
               (let [[_ container contained-str] (re-matches #"(.*) bags contain (.*)." line)]
-                (merge-with set/union acc (let [contained (mapv (fn [contained-item]
-                                                                  (vec (rest (re-matches #"(\d+) (.*) bags?" contained-item))))
-                                                                (str/split contained-str #", "))]
-                                            (when (seq (first contained))
-                                              {container (map #(update % 0 read-string) contained)})))))
+                (merge acc (let [contained (mapv (fn [contained-item]
+                                                   (vec (rest (re-matches #"(\d+) (.*) bags?" contained-item))))
+                                                 (str/split contained-str #", "))]
+                             (when (seq (first contained))
+                               {container (map #(update % 0 read-string) contained)})))))
             {}
             (line-seq rdr))))
 
