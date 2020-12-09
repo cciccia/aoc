@@ -15,7 +15,7 @@
     (let [preamble-set (set preamble)
           test         (first stream)]
       (if (entry-valid-for-premable? preamble-set test)
-        (recur (conj (vec (drop 1 preamble)) test) (rest stream))
+        (recur (conj (subvec preamble 1) test) (rest stream))
         test))))
 
 (defn sum-until-bust
@@ -38,10 +38,10 @@
 
 (defn part2
   [input target]
-  (loop [i 0]
-    (if-let [result (sum-until-bust (drop i input) target)]
-      result
-      (recur (inc i)))))
+  (some
+    (fn [i]
+      (sum-until-bust (drop i input) target))
+    (range)))
 
 (comment
   (part1 (utils/load-edn-input "day9.edn")))
