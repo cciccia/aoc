@@ -1,4 +1,4 @@
-(ns cciccia.aoc.day1
+(ns cciccia.aoc.2019.day1
   (:require [cciccia.aoc.utils :as utils]))
 
 (defn fuel
