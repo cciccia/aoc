@@ -15,3 +15,7 @@
         (when (terminator y)
           y))
       (iterate iterator x))))
+
+(defn transpose-2d-vector
+  [v]
+  (apply mapv vector v))
