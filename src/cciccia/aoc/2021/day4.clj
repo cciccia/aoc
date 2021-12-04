@@ -31,7 +31,7 @@
           new-winners (filter (fn [grid]
                                 (winner-winner-chicken-dinner? grid (set called)))
                               non-winners)]
-      (if (and (= 99 (count winners))
+      (if (and (= (dec (count grids)) (count winners))
                (= 1 (count new-winners)))
         (* (last called) (apply + (set/difference (set (flatten (first new-winners)))
                                                   (set called))))
