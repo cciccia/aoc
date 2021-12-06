@@ -1,4 +1,4 @@
-(ns cciccia.aoc.2021.day5.edn
+(ns cciccia.aoc.2021.day5
   (:require [cciccia.aoc.utils :as utils]))
 
 (defn plot-all-points
@@ -30,4 +30,3 @@
 (comment
   (part1 (utils/load-edn-input "2021/day5.edn") false)
   (part1 (utils/load-edn-input "2021/day5.edn") true))
-
