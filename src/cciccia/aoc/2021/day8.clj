@@ -39,7 +39,8 @@
 
                ; next three are six digits (9, 6, 0)
                ; 9 is the only numbr comprised of both 7 and 4
-               (and (some? (get key 7))
+               (and (= 6 (count pattern))
+                    (some? (get key 7))
                     (some? (get key 4))
                     (set/subset? (get key 7) pattern)
                     (set/subset? (get key 4) pattern))
@@ -76,6 +77,7 @@
                (= 9 (count (keys key)))
                (assoc key 2 pattern)
 
+               ; we don't have enough information to figure out what this is
                :else
                key)))
          {}
