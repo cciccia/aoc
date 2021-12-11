@@ -43,44 +43,33 @@
              (flash p coord))
            input-map))))
 
+(defn step
+  [[input-map flashes]]
+  (->> input-map
+       (map (fn [[coord val]]
+              [coord (inc val)]))
+       (into {})
+       (utils/converge flash-all)
+       ((juxt identity #(->> %
+                             (filter (fn [[_coord val]]
+                                       (zero? val)))
+                             count
+                             (+ flashes))))))
+
 (defn part1
   [input]
-  (let [input-map (input->map input)]
-    (loop [steps 0
-           flashes 0
-           current-input-map input-map]
-      (let [incremented-input-map (->> current-input-map
-                                       (map (fn [[coord val]]
-                                              [coord (inc val)]))
-                                       (into {}))]
-        (if (= steps 100)
-           flashes
-           (let [next-input-map (utils/converge flash-all incremented-input-map)]
-             (recur (inc steps)
-                    (+ flashes (->> (filter (fn [[_coord val]]
-                                              (zero? val))
-                                            next-input-map)
-                                    count))
-                    next-input-map)))))))
+  (second (first (drop 100 (iterate step [(input->map input) 0])))))
 
 (defn part2
   [input]
-  (let [input-map (input->map input)]
-    (loop [steps 0
-           current-input-map input-map]
-      (let [incremented-input-map (->> current-input-map
-                                       (map (fn [[coord val]]
-                                              [coord (inc val)]))
-                                       (into {}))]
-        (let [next-input-map (utils/converge flash-all incremented-input-map)
-              flashes (->> (filter (fn [[_coord val]]
-                                     (zero? val))
-                                   next-input-map)
-                           count)]
-          (if (= flashes 100)
-            (inc steps)
-            (recur (inc steps)
-                   next-input-map)))))))
+  (->> (iterate step [(input->map input) 0])
+       (map-indexed #(vector %1 %2))
+       (some (fn [[i [grid _flashes]]]
+               (when (= 100 (->> (filter (fn [[_coord val]]
+                                           (zero? val))
+                                         grid)
+                                 count))
+                 i)))))
 
 (comment
   (part1 (utils/load-edn-input "2021/day11.edn"))
