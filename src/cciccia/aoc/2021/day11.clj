@@ -65,10 +65,9 @@
   (->> (iterate step [(input->map input) 0])
        (map-indexed #(vector %1 %2))
        (some (fn [[i [grid _flashes]]]
-               (when (= 100 (->> (filter (fn [[_coord val]]
-                                           (zero? val))
-                                         grid)
-                                 count))
+               (when (nil? (some (fn [[_coord val]]
+                                   (pos? val))
+                                 grid))
                  i)))))
 
 (comment
