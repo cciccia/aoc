@@ -1,14 +1,6 @@
 (ns cciccia.aoc.2021.day13
   (:require [cciccia.aoc.utils :as utils]))
 
-(defn make-grid
-  [input]
-  (reduce
-    (fn [p [x y]]
-      (conj p [x y]))
-    #{}
-    input))
-
 (defn fold
   [grid [axis-type axis-num]]
   (->> grid
@@ -48,8 +40,8 @@
       (print "\n"))))
 
 (comment
-  (count (part1 (make-grid (utils/load-edn-input "2021/day13-dots.edn"))
+  (count (part1 (set (utils/load-edn-input "2021/day13-dots.edn"))
                 (take 1 (utils/load-edn-input "2021/day13-folds.edn"))))
-  (-> (part1 (make-grid (utils/load-edn-input "2021/day13-dots.edn"))
+  (-> (part1 (set (utils/load-edn-input "2021/day13-dots.edn"))
              (utils/load-edn-input "2021/day13-folds.edn"))
       print-it))
