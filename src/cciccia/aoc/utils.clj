@@ -38,3 +38,11 @@
   (converge (fn [x]
               (min (inc x) 10))
             0))
+
+(comment
+  (let [max (->> (map (fn [[[x y]]])
+                      (if (= axis-type "x")
+                        x
+                        y))
+               sort
+               reverse first)]))
