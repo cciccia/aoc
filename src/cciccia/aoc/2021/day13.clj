@@ -15,15 +15,11 @@
     (fn [p [x y]]
       (case axis-type
         "x"
-        (-> p
-            (disj [x y])
-            (conj [(- axis-num (Math/abs ^long (- axis-num x))) y]))
+        (conj p [(- axis-num (Math/abs ^long (- axis-num x))) y])
 
         "y"
-        (-> p
-            (disj [x y])
-            (conj [x (- axis-num (Math/abs ^long (- axis-num y)))]))))
-    grid
+        (conj p [x (- axis-num (Math/abs ^long (- axis-num y)))])))
+    #{}
     grid))
 
 (defn part1
