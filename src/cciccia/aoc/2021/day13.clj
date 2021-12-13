@@ -11,16 +11,16 @@
 
 (defn fold
   [grid [axis-type axis-num]]
-  (reduce
-    (fn [p [x y]]
-      (case axis-type
-        "x"
-        (conj p [(- axis-num (Math/abs ^long (- axis-num x))) y])
+  (->> grid
+       (map
+         (fn [[x y]]
+           (case axis-type
+             "x"
+             [(- axis-num (Math/abs ^long (- axis-num x))) y]
 
-        "y"
-        (conj p [x (- axis-num (Math/abs ^long (- axis-num y)))])))
-    #{}
-    grid))
+             "y"
+             [x (- axis-num (Math/abs ^long (- axis-num y)))])))
+       set))
 
 (defn part1
   [grid fold-instructions]
