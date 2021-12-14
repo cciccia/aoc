@@ -40,9 +40,9 @@
                              (update s2 #(+ v (or % 0)))))
                        {})
                      vals
-                     (map #(long (/ % 2)))
+                     (map #(long (Math/ceil (/ % 2))))
                      sort)]
-    (dec (- (last amounts) (first amounts)))))
+    (- (last amounts) (first amounts))))
 
 (comment
   (part1 "PKHOVVOSCNVHHCVVCBOH" (utils/load-edn-input "2021/day14.edn") 10)
