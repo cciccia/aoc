@@ -39,10 +39,15 @@
               (min (inc x) 10))
             0))
 
-(comment
-  (let [max (->> (map (fn [[[x y]]])
-                      (if (= axis-type "x")
-                        x
-                        y))
-               sort
-               reverse first)]))
+(defn two-d-grid->map
+  [input]
+  (reduce
+    (fn [p1 [y line]]
+      (merge p1
+             (reduce
+               (fn [p2 [x n]]
+                 (assoc p2 [x y] n))
+               {}
+               (map-indexed #(vector %1 %2) line))))
+    {}
+    (map-indexed #(vector %1 %2) input)))
