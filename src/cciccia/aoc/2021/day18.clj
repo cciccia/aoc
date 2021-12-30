@@ -111,5 +111,5 @@
 
 (comment
   (part1 (utils/load-edn-input "2021/day18.edn"))
-  (part2 (utils/load-edn-input "2021/day18.edn")) 
+  (part2 (utils/load-edn-input "2021/day18.edn"))
   (part1 (utils/load-edn-input "2021/day18-sample.edn")))
