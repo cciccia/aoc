@@ -69,25 +69,6 @@
       (align (set sensor1) (set (map orientation sensor2))))
     all-orientations))
 
-(defn fit-all
-  [sensors]
-  (loop [done {0 (get sensors 0)}
-         i 1]
-    (let [i (mod i (count sensors))]
-      (if (= (count (vals done)) (count sensors))
-        (set (apply concat (vals done)))
-        (if (contains? done i)
-          (recur done (inc i))
-          (let [sensor2 (get sensors i)]
-            (if-let [aligned-sensor-2 (some
-                                        (fn [sensor1]
-                                          (attempt-fit sensor1 sensor2))
-                                        (vals done))]
-              (do
-                (println (inc (count done)))
-                (recur (assoc done i aligned-sensor-2) (inc i)))
-              (recur done (inc i)))))))))
-
 (defn fit-all-better
   [sensors]
   (loop [universe         (set (get sensors 0))
