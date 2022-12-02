@@ -1,6 +1,7 @@
 (ns cciccia.aoc.utils
   (:require [clojure.edn :as edn]
-            [clojure.java.io :as io])
+            [clojure.java.io :as io]
+            [clojure.string :as str])
   (:import (java.io PushbackReader)))
 
 (defn load-edn-input
@@ -51,3 +52,15 @@
                (map-indexed #(vector %1 %2) line))))
     {}
     (map-indexed #(vector %1 %2) input)))
+
+(defn lined-spaced-input->2d-vec-str
+  [resource-file]
+  (with-open [rdr (io/reader (io/resource resource-file))]
+    (->> (line-seq rdr)
+         (mapv #(str/split % #" ")))))
+
+(defn lined-spaced-input->2d-vec-int
+  [resource-file]
+  (with-open [rdr (io/reader (io/resource resource-file))]
+    (->> (line-seq rdr)
+         (mapv (fn [line] (mapv #(Integer/parseInt %) (str/split line #" ")))))))

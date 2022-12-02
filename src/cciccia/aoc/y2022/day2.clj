@@ -48,4 +48,5 @@
 
 (comment
   (part1 (utils/load-edn-input "2022/day2.edn"))
-  (part2 (utils/load-edn-input "2022/day2.edn")))
+  (part2 (utils/load-edn-input "2022/day2.edn"))
+  (part2 (utils/lined-spaced-input->2d-vec-int "2022/day2.txt")))
