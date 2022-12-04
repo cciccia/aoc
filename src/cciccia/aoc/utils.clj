@@ -53,6 +53,11 @@
     {}
     (map-indexed #(vector %1 %2) input)))
 
+(defn lined-spaced-input->str
+  [resource-file]
+  (with-open [rdr (io/reader (io/resource resource-file))]
+    (mapv identity (line-seq rdr))))
+
 (defn lined-spaced-input->2d-vec-str
   [resource-file]
   (with-open [rdr (io/reader (io/resource resource-file))]
