@@ -27,8 +27,7 @@
         (recur left pwd files)
 
         (some? dir-list)
-        (let [[_ _dir] (re-matches #"dir (\d+)" instr)]
-          (recur left pwd files))
+        (recur left pwd files)
 
         (some? size)
         (recur left pwd (reduce
