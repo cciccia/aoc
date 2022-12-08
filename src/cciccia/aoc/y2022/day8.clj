@@ -37,9 +37,8 @@
     (count trees)))
 
 (defn- score
-  [grid coord vertical? reverse?]
+  [grid coord vertical? reverse? max-major-axis-val]
   (let [height             (get grid coord)
-        max-major-axis-val (->> grid keys (map (if vertical? second first)) (apply max))
         minor-axis-val     (if vertical? (first coord) (second coord))]
     (reduce
       (fn [acc major-axis-val]
@@ -62,10 +61,10 @@
     (->> (cp/pfor 32 [x (range (inc max-x))
                       y (range (inc max-y))]
            (*
-             (score grid [x y] false false)
-             (score grid [x y] false true)
-             (score grid [x y] true false)
-             (score grid [x y] true true)))
+             (score grid [x y] false false max-x)
+             (score grid [x y] false true max-x)
+             (score grid [x y] true false max-y)
+             (score grid [x y] true true max-y)))
          sort
          reverse
          first)))
