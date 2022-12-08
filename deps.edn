@@ -1,17 +1,19 @@
 {:paths   ["src" "resources"]
- :deps    {org.clojure/clojure {:mvn/version "1.10.3"}
+ :deps    {org.clojure/clojure            {:mvn/version "1.10.3"}
            org.clojure/math.combinatorics {:mvn/version "0.1.6"}
-           com.taoensso/timbre {:mvn/version "5.1.0"}
-           metosin/spec-tools {:mvn/version "0.10.4"}
-           org.flatland/ordered {:mvn/version "1.5.9"}}
+           com.taoensso/timbre            {:mvn/version "5.1.0"}
+           metosin/spec-tools             {:mvn/version "0.10.4"}
+           org.flatland/ordered           {:mvn/version "1.5.9"}
+           org.clj-commons/claypoole      {:mvn/version "1.2.2"}}
+
  :aliases {:test    {:extra-paths ["test"]
                      :extra-deps  {org.clojure/test.check {:mvn/version "1.0.0"}}}
            :runner
-                    {:extra-deps {com.cognitect/test-runner
-                                  {:git/url "https://github.com/cognitect-labs/test-runner"
-                                   :sha     "b6b3193fcc42659d7e46ecd1884a228993441182"}}
-                     :main-opts  ["-m" "cognitect.test-runner"
-                                  "-d" "test"]}
+           {:extra-deps {com.cognitect/test-runner
+                         {:git/url "https://github.com/cognitect-labs/test-runner"
+                          :sha     "b6b3193fcc42659d7e46ecd1884a228993441182"}}
+            :main-opts  ["-m" "cognitect.test-runner"
+                         "-d" "test"]}
            :uberjar {:extra-deps {seancorfield/depstar {:mvn/version "1.1.128"}}
                      :main-opts  ["-m" "hf.depstar.uberjar" "aoc.jar"
                                   "-C" "-m" "cciccia.aoc"]}}}

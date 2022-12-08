@@ -65,7 +65,9 @@
          (mapv #(str/split % #" ")))))
 
 (defn lined-spaced-input->2d-vec-int
-  [resource-file]
-  (with-open [rdr (io/reader (io/resource resource-file))]
-    (->> (line-seq rdr)
-         (mapv (fn [line] (mapv #(Integer/parseInt %) (str/split line #" ")))))))
+  ([resource-file]
+   (lined-spaced-input->2d-vec-int resource-file #" "))
+  ([resource-file re]
+   (with-open [rdr (io/reader (io/resource resource-file))]
+     (->> (line-seq rdr)
+          (mapv (fn [line] (mapv #(Integer/parseInt %) (str/split line re))))))))
