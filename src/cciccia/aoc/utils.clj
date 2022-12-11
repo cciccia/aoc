@@ -2,7 +2,8 @@
   (:require [clojure.edn :as edn]
             [clojure.java.io :as io]
             [clojure.string :as str])
-  (:import (java.io PushbackReader)))
+  (:import (java.io PushbackReader)
+           (clojure.lang PersistentQueue)))
 
 (defn load-edn-input
   [resource-file]
@@ -71,3 +72,8 @@
    (with-open [rdr (io/reader (io/resource resource-file))]
      (->> (line-seq rdr)
           (mapv (fn [line] (mapv #(Integer/parseInt %) (str/split line re))))))))
+
+(defn queue
+  ([] (PersistentQueue/EMPTY))
+  ([coll]
+   (reduce conj PersistentQueue/EMPTY coll)))
