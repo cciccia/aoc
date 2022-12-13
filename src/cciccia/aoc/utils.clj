@@ -60,10 +60,12 @@
     (mapv identity (line-seq rdr))))
 
 (defn lined-spaced-input->2d-vec-str
-  [resource-file]
-  (with-open [rdr (io/reader (io/resource resource-file))]
-    (->> (line-seq rdr)
-         (mapv #(str/split % #" ")))))
+  ([resource-file]
+   (lined-spaced-input->2d-vec-str resource-file #" "))
+  ([resource-file re]
+   (with-open [rdr (io/reader (io/resource resource-file))]
+     (->> (line-seq rdr)
+          (mapv #(str/split % re))))))
 
 (defn lined-spaced-input->2d-vec-int
   ([resource-file]
