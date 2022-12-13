@@ -43,7 +43,7 @@
   (->> input
        (map-indexed (fn [i [l1 l2]]
                       [i (compare-thing l1 l2)]))
-       (filter #(= :yes (second %)))
+       (filter #(= -1 (second %)))
        (map #(inc (first %)))
        (apply +)))
 
