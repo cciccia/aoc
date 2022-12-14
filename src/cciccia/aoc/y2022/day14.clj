@@ -41,7 +41,7 @@
         (not (contains? grid [(inc x) (inc y)]))
         [(inc x) (inc y)]
 
-        (= [500 0] coord)
+        (contains? grid coord)
         :done
 
         :else
@@ -78,8 +78,7 @@
     (cond-> (->> grid
                  (filter (fn [[_k v]]
                            (= v "o")))
-                 count)
-            part2? inc)))
+                 count))))
 
 (comment
   (part1 (utils/load-edn-input "2022/day14.edn") true))
