@@ -29,6 +29,6 @@
        (apply +)))
 
 (comment
-  (part1 (utils/load-edn-input "2021/day6.edn") 80)
-  (part1 (utils/load-edn-input "2021/day6.edn") 256)
+  (part1 (utils/load-edn-input "2021/day7.edn") 80)
+  (part1 (utils/load-edn-input "2021/day7.edn") 256)
   (part1 (utils/load-edn-input "2021/day6-sample.edn") 18))
